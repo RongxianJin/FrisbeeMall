@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卖家登录/注册</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        input {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 0.75rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .switch-form a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>卖家登录</h1>
+        <form id="login-form">
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">登录</button>
+        </form>
+        <div class="switch-form">
+            <p>还没有账号？<a href="#" id="switch-to-register">立即注册</a></p>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const container = document.querySelector('.container');
+
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            container.innerHTML = `
+                <h1>卖家注册</h1>
+                <form id="register-form">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required>
+                    
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    
+                    <button type="submit">注册</button>
+                </form>
+                <div class="switch-form">
+                    <p>已有账号？<a href="#" id="switch-to-login">立即登录</a></p>
+                </div>
+            `;
+
+            const switchToLogin = document.getElementById('switch-to-login');
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>
