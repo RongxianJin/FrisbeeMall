@@ -122,6 +122,7 @@
             <li><a href="#add-product">发布商品</a></li>
             <li><a href="#product-list">商品列表</a></li>
             <li><a href="#buyer-info">意向购买人信息</a></li>
+            <li><a href="#change-password">更改密码</a></li>
         </ul>
     </nav>
     <div class="container">
@@ -155,25 +156,8 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>示例商品1</td>
-                        <td>¥99.99</td>
-                        <td>正常</td>
-                        <td class="action-buttons">
-                            <button>修改</button>
-                            <button>冻结</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>示例商品2</td>
-                        <td>¥199.99</td>
-                        <td>已冻结</td>
-                        <td class="action-buttons">
-                            <button>修改</button>
-                            <button>解冻</button>
-                        </td>
-                    </tr>
+                <tbody id="product-tbody">
+                    <!-- 商品列表将在这里动态生成 -->
                 </tbody>
             </table>
         </section>
@@ -205,6 +189,133 @@
                 </tbody>
             </table>
         </section>
+
+        <section id="change-password">
+            <h2>更改密码</h2>
+            <form id="change-password-form">
+                <label for="old-password">旧密码</label>
+                <input type="password" id="old-password" name="old-password" required>
+
+                <label for="new-password">新密码</label>
+                <input type="password" id="new-password" name="new-password" required>
+
+                <button type="submit">更改密码</button>
+            </form>
+        </section>
     </div>
+
+    <script>
+        document.getElementById('product-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const productData = {
+                name: formData.get('product-name'),
+                description: formData.get('product-description'),
+                price: parseFloat(formData.get('product-price')),
+                image: await uploadImage(formData.get('product-image')) // 上传图片并获取URL
+            };
+
+            try {
+                const response = await fetch('/ProductController/addProduct', { // 替换为实际API路径
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                const result = await response.json();
+                if (result.code === 0) {
+                    alert('商品发布成功！');
+                    addProductToTable(result.data); // 假设返回数据中包含新商品信息
+                    this.reset();
+                } else {
+                    alert('商品发布失败：' + result.message);
+                }
+            } catch (error) {
+                alert('发布商品时发生错误：' + error.message);
+            }
+        });
+
+        async function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await fetch('/api/upload', { // 替换为实际上传API路径
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            return result.url; // 假设返回中包含图片的URL
+        }
+
+        function addProductToTable(product) {
+            const tbody = document.getElementById('product-tbody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${product.name}</td>
+                <td>¥${product.price.toFixed(2)}</td>
+                <td>${product.status === 1 ? '正常' : '已冻结'}</td>
+                <td class="action-buttons">
+                    <button onclick="toggleProductStatus(${product.id}, ${product.status})">${product.status === 1 ? '冻结' : '解冻'}</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        async function toggleProductStatus(productId, currentStatus) {
+            const newStatus = currentStatus === 1 ? 0 : 1; // 假设1为正常，0为冻结
+            try {
+                const response = await fetch(`/api/products/${productId}/status`, { // 替换为实际API路径
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                const result = await response.json();
+                if (result.code === 0) {
+                    alert('商品状态更新成功！');
+                    // 重新加载商品列表，或直接更新DOM
+                    location.reload(); // 重新加载页面以获取最新商品状态
+                } else {
+                    alert('商品状态更新失败：' + result.message);
+                }
+            } catch (error) {
+                alert('更新商品状态时发生错误：' + error.message);
+            }
+        }
+
+        document.getElementById('change-password-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const passwordData = {
+                oldPassword: formData.get('old-password'),
+                newPassword: formData.get('new-password')
+            };
+
+            try {
+                const response = await fetch('/api/change-password', { // 替换为实际更改密码API路径
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(passwordData)
+                });
+
+                const result = await response.json();
+                if (result.code === 0) {
+                    alert('密码更改成功！');
+                    this.reset();
+                } else {
+                    alert('密码更改失败：' + result.message);
+                }
+            } catch (error) {
+                alert('更改密码时发生错误：' + error.message);
+            }
+        });
+    </script>
 </body>
 </html>

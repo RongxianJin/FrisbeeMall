@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/show")
-    public ResponseEntity<Result<List<User>>> choose() {
+    public ResponseEntity<Result<List<User>>> show() {
         List<User> users=userService.getUsers();
         return ResponseEntity.ok((Result.success(users)));
 
