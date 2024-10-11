@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FrisbeeMall</h1>
+    </header>
+
+    <section id="dashboard">
+        <div id="product-management">
+            <h2>发布新商品</h2>
+            <form id="product-form">
+                <label for="product-name">商品名称:</label>
+                <input type="text" id="product-name" required placeholder="商品名称">
+                <label for="product-desc">商品描述:</label>
+                <textarea id="product-desc" required placeholder="商品描述"></textarea>
+                <label for="product-price">价格:</label>
+                <input type="number" id="product-price" required placeholder="价格">
+                <label for="product-image">图片URL:</label>
+                <input type="text" id="product-image" required placeholder="图片链接">
+                <button type="submit">发布商品</button>
+            </form>
+        </div>
+
+        <div id="buyers-info">
+            <h2>购买意向人信息</h2>
+            <ul id="buyers-list">
+                <!-- 意向购买人信息通过JS动态填充 -->
+            </ul>
+        </div>
+
+        <div id="product-freeze">
+            <h2>商品管理</h2>
+            <button id="freeze-product">冻结商品</button>
+            <button id="unfreeze-product">解冻商品</button>
+        </div>
+
+        <div id="history-section">
+            <h2>历史商品</h2>
+            <ul id="history-list">
+                <!-- 历史商品信息通过JS动态填充 -->
+            </ul>
+        </div>
+
+        <div id="account-management">
+            <h2>修改账号和密码</h2>
+            <form id="account-form">
+                <label for="new-username">新账号:</label>
+                <input type="text" id="new-username" required placeholder="请输入新账号">
+                <label for="new-password">新密码:</label>
+                <input type="password" id="new-password" required placeholder="请输入新密码">
+                <button type="submit">保存修改</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

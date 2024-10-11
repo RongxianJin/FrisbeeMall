@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>卖家登录</h1>
+    </header>
+
+    <section>
+        <form id="login-form">
+            <h2>登录账号</h2>
+            <label for="username">账号:</label>
+            <input type="text" id="username" required placeholder="请输入账号">
+            <label for="password">密码:</label>
+            <input type="password" id="password" required placeholder="请输入密码">
+            <button type="submit">登录</button>
+            <p id="login-error" style="color: red; display: none;">账号或密码错误，请重试。</p>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://localhost:8080/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 登录成功，跳转到后台页面
+                    window.location.href = 'admin.html';
+                } else {
+                    // 登录失败，显示错误提示
+                    document.getElementById('login-error').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
