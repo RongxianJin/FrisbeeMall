@@ -15,6 +15,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping("/show")
     public ResponseEntity<Result<Product>> getCurrentProduct(){
         Product product = productService.getCurrentProduct();
         return ResponseEntity.ok(Result.success(product));
