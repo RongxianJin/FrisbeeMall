@@ -38,8 +38,15 @@ public class ProductService {
     }
 
     @Transactional
-    public int  addProduct(Product product) {
-        return  productDao.insert(product);
+    public int addProduct(Product product) {
+
+        return productDao.insertProduct(
+                product.getName(),
+                product.getDescription(),
+                product.getImageUrl(),
+                product.getPrice(),
+                product.getStatus()
+        );
     }
 
     @Transactional

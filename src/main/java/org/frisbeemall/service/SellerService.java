@@ -10,7 +10,7 @@ public class SellerService {
     @Autowired
     private SellerDao sellerDao;
 
-    public int updatepassword(long id, String password) {
+    public int updatepassword(Long id, String password) {
         Seller seller=sellerDao.selectById(id);
         seller.setPassword(password);
         return sellerDao.updateById(seller);
