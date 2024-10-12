@@ -9,6 +9,6 @@ import org.frisbeemall.domain.Product;
 @Mapper
 public interface ProductDao extends BaseMapper<Product> {
 
-    @Select("SELECT * FROM products WHERE status = 0")
+    @Select("SELECT * FROM product WHERE status = 0")
     Product selectCurrentProduct();
 }

@@ -14,7 +14,9 @@ public class ProductService {
     private ProductDao productDao;
 
     public Product getCurrentProduct() {
-        return productDao.selectCurrentProduct(); // 假设只有一个商品，ID 为 1
+
+
+        return productDao.selectCurrentProduct();
     }
 
     @Transactional
