@@ -20,9 +20,9 @@ public class UserController {
         return ResponseEntity.ok(Result.success("提交成功"));
     }
 
-    @GetMapping("/show")
-    public ResponseEntity<Result<List<User>>> show() {
-        List<User> users=userService.getUsers();
+    @GetMapping("/show/{productId}")
+    public ResponseEntity<Result<List<User>>> show(Long productId) {
+        List<User> users=userService.getUsers(productId);
         return ResponseEntity.ok((Result.success(users)));
 
     }

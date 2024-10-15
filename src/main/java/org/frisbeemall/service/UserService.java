@@ -20,8 +20,9 @@ public class UserService {
 
     }
 
-    public List<User> getUsers() {
-        List<User> users=userDao.selectList(null);
+    public List<User> getUsers(Long productId) {
+        List<User> users=userDao.getUserById(productId);
+
         return users;
     }
     @Transactional
