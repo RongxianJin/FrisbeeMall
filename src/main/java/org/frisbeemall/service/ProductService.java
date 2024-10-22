@@ -19,15 +19,19 @@ public class ProductService {
         return productDao.selectCurrentProduct();
     }
 
+    public Product getProductById(int id) {
+        return productDao.selectById(id);
+    }
+
     @Transactional
-    public int freezeProduct(long id) {
+    public int freezeProduct(Integer id) {
         Product product = productDao.selectById(id);
         product.setStatus(1);
         return productDao.updateById(product);
     }
 
     @Transactional
-    public int  unfreezeProduct(long id) {
+    public int  unfreezeProduct(Integer id) {
         Product product = productDao.selectById(id);
         product.setStatus(0);
         return productDao.updateById(product);
@@ -46,10 +50,11 @@ public class ProductService {
 
 
     @Transactional
-    public int sellProduct(long id) {
-        Product product=productDao.selectById(id);
-        product.setStatus(3);
-        return productDao.updateById(product);
+    public int sellProduct(Product product) {
+
+        if(product.getStock()==0) product.setStatus(1);
+
+       return productDao.updateById(product);
 
     }
 

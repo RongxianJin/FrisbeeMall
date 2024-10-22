@@ -14,13 +14,14 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public int addUser(User user) {
-        user.setStatus(0);
-        return userDao.insert(user);
+    public int addUser(String username,String password,String phone,String location) {
+
+
+        return userDao.insertUser(username, password, phone, location);
 
     }
 
-    public List<User> getUsers(Long productId) {
+    public List<User> getUsers(Integer productId) {
         List<User> users=userDao.getUserById(productId);
 
         return users;
@@ -31,4 +32,11 @@ public class UserService {
         user.setStatus(1);
         return  userDao.updateById(user);
     }
+
+    public List<User> getAllUsers(){
+        List<User> users =userDao.selectList(null);
+        return users;
+    }
+
+
 }

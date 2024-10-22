@@ -14,18 +14,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/submit")
-    public ResponseEntity<Result<String>> submit(@RequestBody User user) {
-        userService.addUser(user);
+    @PostMapping("/register")
+    public ResponseEntity<Result<String>> register( @RequestParam String name, @RequestParam String password ,@RequestParam String phone ,@RequestParam String location    ) {
+        userService.addUser(name, password, phone, location);
         return ResponseEntity.ok(Result.success("提交成功"));
     }
 
-    @GetMapping("/show/{productId}")
-    public ResponseEntity<Result<List<User>>> show(Long productId) {
-        List<User> users=userService.getUsers(productId);
-        return ResponseEntity.ok((Result.success(users)));
 
-    }
     @PutMapping("/choose/{id}")
     public ResponseEntity<Result<String>> choose(@PathVariable Integer id) {
         userService.chooseUser(id);

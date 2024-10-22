@@ -5,13 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
- * @TableName user
+ * @TableName orders
  */
-@TableName(value ="user")
-public class User implements Serializable {
+@TableName(value ="orders")
+public class Orders implements Serializable {
     /**
      * 
      */
@@ -21,27 +22,27 @@ public class User implements Serializable {
     /**
      * 
      */
-    private String name;
+    private Integer userId;
 
     /**
      * 
      */
-    private String phone;
+    private Date orderDate;
 
     /**
      * 
      */
-    private Integer status;
+    private Integer totalAmount;
 
     /**
      * 
      */
-    private String location;
+    private String status;
 
     /**
      * 
      */
-    private String password;
+    private Integer productId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -63,71 +64,71 @@ public class User implements Serializable {
     /**
      * 
      */
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
     /**
      * 
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     /**
      * 
      */
-    public String getPhone() {
-        return phone;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
     /**
      * 
      */
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     /**
      * 
      */
-    public Integer getStatus() {
+    public Integer getTotalAmount() {
+        return totalAmount;
+    }
+
+    /**
+     * 
+     */
+    public void setTotalAmount(Integer totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    /**
+     * 
+     */
+    public String getStatus() {
         return status;
     }
 
     /**
      * 
      */
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     /**
      * 
      */
-    public String getLocation() {
-        return location;
+    public Integer getProductId() {
+        return productId;
     }
 
     /**
      * 
      */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
-     * 
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -141,13 +142,13 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        Orders other = (Orders) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getOrderDate() == null ? other.getOrderDate() == null : this.getOrderDate().equals(other.getOrderDate()))
+            && (this.getTotalAmount() == null ? other.getTotalAmount() == null : this.getTotalAmount().equals(other.getTotalAmount()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
+            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()));
     }
 
     @Override
@@ -155,11 +156,11 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getOrderDate() == null) ? 0 : getOrderDate().hashCode());
+        result = prime * result + ((getTotalAmount() == null) ? 0 : getTotalAmount().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getLocation() == null) ? 0 : getLocation().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
         return result;
     }
 
@@ -170,11 +171,11 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", phone=").append(phone);
+        sb.append(", userId=").append(userId);
+        sb.append(", orderDate=").append(orderDate);
+        sb.append(", totalAmount=").append(totalAmount);
         sb.append(", status=").append(status);
-        sb.append(", location=").append(location);
-        sb.append(", password=").append(password);
+        sb.append(", productId=").append(productId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

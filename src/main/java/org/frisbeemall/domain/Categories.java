@@ -8,10 +8,10 @@ import java.io.Serializable;
 
 /**
  * 
- * @TableName user
+ * @TableName categories
  */
-@TableName(value ="user")
-public class User implements Serializable {
+@TableName(value ="categories")
+public class Categories implements Serializable {
     /**
      * 
      */
@@ -26,22 +26,7 @@ public class User implements Serializable {
     /**
      * 
      */
-    private String phone;
-
-    /**
-     * 
-     */
-    private Integer status;
-
-    /**
-     * 
-     */
-    private String location;
-
-    /**
-     * 
-     */
-    private String password;
+    private Integer parentId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -77,57 +62,15 @@ public class User implements Serializable {
     /**
      * 
      */
-    public String getPhone() {
-        return phone;
+    public Integer getParentId() {
+        return parentId;
     }
 
     /**
      * 
      */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * 
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * 
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
-     * 
-     */
-    public String getLocation() {
-        return location;
-    }
-
-    /**
-     * 
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
-     * 
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     @Override
@@ -141,13 +84,10 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        Categories other = (Categories) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()));
     }
 
     @Override
@@ -156,10 +96,7 @@ public class User implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
-        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getLocation() == null) ? 0 : getLocation().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         return result;
     }
 
@@ -171,10 +108,7 @@ public class User implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", phone=").append(phone);
-        sb.append(", status=").append(status);
-        sb.append(", location=").append(location);
-        sb.append(", password=").append(password);
+        sb.append(", parentId=").append(parentId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

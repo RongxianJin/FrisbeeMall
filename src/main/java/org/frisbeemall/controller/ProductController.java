@@ -76,22 +76,17 @@ public class ProductController {
     }
 
     @PostMapping("/freeze/{id}")
-    public ResponseEntity<Result<String>> freezeProduct(@PathVariable Long id) {
+    public ResponseEntity<Result<String>> freezeProduct(@PathVariable Integer id) {
         productService.freezeProduct(id);
         return ResponseEntity.ok(Result.success("冻结商品成功"));
     }
 
     @PostMapping("/unfreeze/{id}")
-    public ResponseEntity<Result<String>> unfreezeProduct(@PathVariable Long id) {
+    public ResponseEntity<Result<String>> unfreezeProduct(@PathVariable Integer id) {
         productService.unfreezeProduct(id);
         return ResponseEntity.ok(Result.success("解冻商品成功"));
     }
 
-    @PostMapping("/sell/{id}")
-    public ResponseEntity<Result<String>> sellProduct(@PathVariable Long id) {
-        productService.sellProduct(id);
-        return ResponseEntity.ok(Result.success("售出商品成功"));
-    }
 
 
 }
