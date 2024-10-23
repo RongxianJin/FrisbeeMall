@@ -37,7 +37,7 @@ public class Orders implements Serializable {
     /**
      * 
      */
-    private String status;
+    private Integer status;
 
     /**
      * 
@@ -106,14 +106,14 @@ public class Orders implements Serializable {
     /**
      * 
      */
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
     /**
      * 
      */
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

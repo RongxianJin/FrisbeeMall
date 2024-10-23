@@ -21,9 +21,9 @@ public class ProductController {
 
 
     @GetMapping("/show")
-    public ResponseEntity<Result<Product>> getCurrentProduct(){
-        Product product = productService.getCurrentProduct();
-        return ResponseEntity.ok(Result.success(product));
+    public Result<List<Product>> getCurrentProduct(){
+        List<Product> products = productService.getCurrentProduct();
+        return Result.success(products);
     }
 
     @PostMapping("/add")
@@ -73,18 +73,6 @@ public class ProductController {
     public ResponseEntity<Result<List<Product>>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(Result.success(products));
-    }
-
-    @PostMapping("/freeze/{id}")
-    public ResponseEntity<Result<String>> freezeProduct(@PathVariable Integer id) {
-        productService.freezeProduct(id);
-        return ResponseEntity.ok(Result.success("冻结商品成功"));
-    }
-
-    @PostMapping("/unfreeze/{id}")
-    public ResponseEntity<Result<String>> unfreezeProduct(@PathVariable Integer id) {
-        productService.unfreezeProduct(id);
-        return ResponseEntity.ok(Result.success("解冻商品成功"));
     }
 
 

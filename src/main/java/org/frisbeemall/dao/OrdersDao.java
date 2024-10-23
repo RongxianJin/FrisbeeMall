@@ -17,5 +17,5 @@ public interface OrdersDao extends BaseMapper<Orders> {
     List<Orders> findByUserId(Integer id);
 
     @Insert("INSERT INTO orders (user_id, order_date, total_amount, status) VALUES (#{userId}, #{orderDate}, #{totalAmount}, #{status})")
-    int insertOrder(Integer userId, Date orderDate, Integer totalAmount, String status);
+    int insertOrder(Integer userId, Date orderDate, Integer totalAmount, Integer status);
 }
