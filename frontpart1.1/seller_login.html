@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卖家登录 - 飞盘购物系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <h1 class="login-title">卖家登录</h1>
+        <form id="login-form">
+            <input type="text" id="username" name="username" placeholder="用户名" required>
+            <input type="password" id="password" name="password" placeholder="密码" required>
+            <button type="submit">登录</button>
+        </form>
+        <div id="error-message" class="error-message"></div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const API_BASE_URL = 'http://localhost:8080';
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                try {
+                    const response = await axios.post(`${API_BASE_URL}/seller/login`, null, {
+                        params: {
+                            username: username,
+                            password: password
+                        },
+                        withCredentials: true
+                    });
+
+                    if (response.data.code === 200) {
+                        console.log('登录成功，准备跳转');
+                        console.log('跳转地址:', 'seller.html');
+                        window.location.href = 'seller.html';
+                    } else {
+                        console.log('登录失败，服务器返回:', response.data);
+                        errorMessage.textContent = response.data.message || '登录失败';
+                    }
+                } catch (error) {
+                    console.error('登录失败:', error);
+                    errorMessage.textContent = '登录失败，请稍后重试';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

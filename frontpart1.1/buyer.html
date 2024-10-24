@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞盘购物 - 买家页面</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>飞盘购物</h1>
+        
+        <div id="userActions">
+            <button id="loginBtn">登录</button>
+            <button id="registerBtn">注册</button>
+        </div>
+
+        <div id="searchBar">
+            <input type="text" id="searchInput" placeholder="搜索商品">
+            <button id="searchBtn">搜索</button>
+        </div>
+
+        <div id="categoryNav">
+            <!-- 这里将动态加载类别 -->
+        </div>
+
+        <div id="productList">
+            <!-- 这里将动态加载商品列表 -->
+        </div>
+
+        <div id="pagination">
+            <!-- 这里将添加分页控件 -->
+        </div>
+
+        <div id="userProfile" style="display: none;">
+            <h2>用户信息</h2>
+            <div id="userInfo"></div>
+            <h3>历史订单</h3>
+            <div id="orderHistory"></div>
+        </div>
+
+        <div id="loginForm" style="display: none;">
+            <h2>用户登录</h2>
+            <form id="loginFormElement">
+                <input type="text" id="loginUsername" placeholder="用户名" required>
+                <input type="password" id="loginPassword" placeholder="密码" required>
+                <button type="submit">登录</button>
+            </form>
+        </div>
+
+        <div id="registerForm" style="display: none;">
+            <h2>用户注册</h2>
+            <form id="registerFormElement">
+                <input type="text" id="registerUsername" placeholder="用户名" required>
+                <input type="password" id="registerPassword" placeholder="密码" required>
+                <input type="tel" id="registerPhone" placeholder="电话号码" required>
+                <input type="text" id="registerLocation" placeholder="默认交易地点" required>
+                <button type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="buyer.js"></script>
+</body>
+</html>
